@@ -23,7 +23,10 @@ class CustomerResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')->required(),
+            Forms\Components\TextInput::make('email')->email()->required(),
+            Forms\Components\TextInput::make('phone')->tel()->required(),
+
             ]);
     }
 
@@ -31,13 +34,24 @@ class CustomerResource extends Resource
     {
         return $table
             ->columns([
-                //
+                 Tables\Columns\TextColumn::make('id'),
+                 Tables\Columns\TextColumn::make('name'),
+                 Tables\Columns\TextColumn::make('email'),
+                 Tables\Columns\TextColumn::make('phone'),
+                 Tables\Columns\TextColumn::make('created_at')
+                     ->dateTime(),
+                 Tables\Columns\TextColumn::make('updated_at')
+                     ->dateTime(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make(),
+                
+
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
